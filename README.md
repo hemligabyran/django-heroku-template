@@ -41,6 +41,9 @@ Add sendgrid addon to your heroku app, to enable sending of emails (optional)
 
 ```heroku addons:add sendgrid:starter```
 
+Add sentry addon to your heroku app, to enable exception logging (optional)
+
+```heroku addons:add sentry:developer```
 
 ### Configure project ###
 

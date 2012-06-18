@@ -4,7 +4,6 @@ from urlparse import urlparse, uses_netloc
 boolean = lambda value: bool(int(value))
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 uses_netloc.append('postgres')
-uses_netloc.append('redis')
 
 DEBUG = boolean(os.environ.get('DEBUG', 0))
 TEMPLATE_DEBUG = DEBUG
@@ -159,15 +158,3 @@ LOGGING = {
     }
 }
 
-# Cache configuration
-url = urlparse(os.environ['REDISTOGO_URL'])
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': "{0.hostname}:{0.port}".format(url),
-        'OPTIONS': {
-            'PASSWORD': url.password,
-            'DB': 0
-        }
-    }
-}

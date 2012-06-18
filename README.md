@@ -37,9 +37,6 @@ If you're not using virtualenv or virtualenvwrapper you may skip this step.
 
 ```heroku apps:create -s cedar {{ project_name}}```
 
-Add redis addon to your heroku app
- 
-```heroku addons:add redistogo:nano```
 
 ### Configure project ###
 

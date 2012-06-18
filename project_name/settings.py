@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
-from urlparse import urlparse, uses_netloc
+import dj_database_url
+
 boolean = lambda value: bool(int(value))
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
-uses_netloc.append('postgres')
 
 DEBUG = boolean(os.environ.get('DEBUG', 0))
 TEMPLATE_DEBUG = DEBUG
@@ -14,16 +14,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-url = urlparse(os.environ['DATABASE_URL'])
 DATABASES = {
-    'default': {
-        'NAME': url.path[1:],
-        'USER': url.username,
-        'PASSWORD': url.password,
-        'HOST': url.hostname,
-        'PORT': url.port,
-        'ENGINE': 'django.db.backends.postgresql_psycopg2'
-    }
+    'default': dj_database_url.config(default='sqlite:///db.sqlite')
 }
 
 # Local time zone for this installation. Choices can be found here:

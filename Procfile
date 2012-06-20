@@ -1,1 +1,1 @@
-web: python {{ project_name }}/manage.py run_gunicorn 0.0.0.0:$PORT
+web: python manage.py run_gunicorn 0.0.0.0:$PORT

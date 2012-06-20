@@ -64,9 +64,7 @@ STATIC_ROOT = os.environ.get('STATIC_ROOT', local_path('static/'))
 STATIC_URL = os.environ.get('STATIC_URL', '/static/')
 
 # Additional locations of static files
-STATICFILES_DIRS = (
-    local_path('assets/')
-)
+STATICFILES_DIRS = []
 
 # List of finder classes that know how to find static files in
 # various locations.

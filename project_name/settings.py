@@ -76,15 +76,20 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-# Config for storing static files at Amazon S3
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+# Wether Django should host static files or not
+HOST_STATIC = True
 
-if AWS_STORAGE_BUCKET_NAME:
+# Config for hosting static files on Amazon S3
+if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     if 'STATIC_URL' not in os.environ:
-        STATIC_URL = 'http://{bucket}.s3.amazonaws.com/'.format(bucket=AWS_STORAGE_BUCKET_NAME)
+        STATIC_URL = 'http://{bucket}.s3.amazonaws.com/'.format(
+            bucket=AWS_STORAGE_BUCKET_NAME)
+
+    HOST_STATIC = False
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '{{ secret_key }}'

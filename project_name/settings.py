@@ -121,7 +121,7 @@ TEMPLATE_DIRS = (
     local_path('templates/')
 )
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -130,9 +130,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'gunicorn',
-    'storages',
-    'raven.contrib.django'
-)
+    'storages'
+]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -170,3 +169,7 @@ if 'SENDGRID_USERNAME' in os.environ:
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
+
+# Adds Raven if the Sentry addon is installed
+if 'SENTRY_DSN' in os.environ:
+    INSTALLED_APPS.append('raven.contrib.django')
